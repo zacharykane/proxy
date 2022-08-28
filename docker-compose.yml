@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  api:
+    image: node:lts
+    container_name: 'test-proxy-api'
+    entrypoint: ['node', '/app/index.js']
+    volumes:
+      - ./:/app
+    networks:
+      - tomenet
+
+  proxy:
+    image: 'nginx:stable'
+    container_name: 'test-proxy-server'
+    ports:
+      - 80:80
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./static/:/usr/share/nginx/html
+    networks:
+      - tomenet
+    depends_on:
+      - api
+
+networks:
+  tomenet:
+    driver: bridge
