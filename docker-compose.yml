@@ -3,7 +3,7 @@ services:
   api:
     image: node:lts
     container_name: 'test-proxy-api'
-    entrypoint: ['node', '/app/index.js']
+    entrypoint: ['node', '/app/server/index.js']
     volumes:
       - ./:/app
     networks:
@@ -15,8 +15,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-      - ./static/:/usr/share/nginx/html
+      - ./server/default.conf:/etc/nginx/conf.d/default.conf
+      - ./server/static/:/usr/share/nginx/html
     networks:
       - tomenet
     depends_on:
