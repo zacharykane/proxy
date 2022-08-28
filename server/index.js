@@ -10,6 +10,8 @@ const app = new Koa({
 app.use(koaBody());
 app.use(async (ctx) => {
   console.log(ctx.request.headers);
+  // ctx.set('Access-Control-Allow-Origin', 'http://192.168.0.4');
+  // ctx.set('Access-Control-Allow-Headers', 'Authorization');
   ctx.body = {
     message: 'api response',
   };
